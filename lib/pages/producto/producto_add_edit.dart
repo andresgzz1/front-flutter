@@ -200,7 +200,6 @@ class _ProductoAddEditState extends State<ProductoAddEdit> {
               hintColor: Colors.black.withOpacity(0.7),
               borderRadius: 10,
               showPrefixIcon: false,
-              suffixIcon: const Icon(Icons.monetization_on),
             ),
           ),
           picPicker(

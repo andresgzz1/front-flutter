@@ -10,13 +10,14 @@ import 'package:appflutter/pages/producto/producto_list.dart';
 import 'package:appflutter/pages/proveedor/proveedor_add_edit.dart';
 import 'package:appflutter/pages/proveedor/proveedor_list.dart';
 import 'package:appflutter/config.dart';
+import 'package:appflutter/pages/inicio/home.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'App Empresa SNKRS';
+  static const String _title = 'App SNKRS';
 
   @override
   Widget build(BuildContext context) {
@@ -62,83 +63,159 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: <Widget>[
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'EMPRESA SNKRS',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Ingresar',
-                  style: TextStyle(fontSize: 20),
-                )),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
+    return Scaffold(
+      body: SingleChildScrollView(
+          child: SafeArea(
+              child: Column(
+        children: [
+          Container(height: 100),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            height: 55,
+            decoration: BoxDecoration(
+                color: Color(0xFFF5F9FD),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF475269).withOpacity(0.3),
+                    blurRadius: 5,
+                    spreadRadius: 1, //opacar el rectangulo
+                  )
+                ]),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.person,
+                  size: 27,
+                  color: Color(0xFF475269),
                 ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
-              child: const Text(
-                'Olvido su contraseña',
-              ),
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Acceder'),
-                  onPressed: () {
-                    login();
-                  },
-                )),
-            Row(
-              // ignore: sort_child_properties_last
-              children: <Widget>[
-                const Text('No tiene Cuenta ?'),
-                TextButton(
-                  child: const Text(
-                    'Registrarse',
-                    style: TextStyle(fontSize: 20),
+                SizedBox(width: 10),
+                Container(
+                  // margin: EdgeInsets.,
+                  width: 250,
+                  child: TextFormField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "ingrese su nombre"),
                   ),
-                  onPressed: () {
-                    //signup screen
-                  },
                 )
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
-          ],
-        ));
+          ),
+          SizedBox(height: 20),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            height: 55,
+            decoration: BoxDecoration(
+                color: Color(0xFFF5F9FD),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF475269).withOpacity(0.3),
+                    blurRadius: 5,
+                    spreadRadius: 1, //opacar el rectangulo
+                  )
+                ]),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.lock,
+                  size: 27,
+                  color: Color(0xFF475269),
+                ),
+                SizedBox(width: 10),
+                Container(
+                  // margin: EdgeInsets.,
+                  width: 250,
+                  child: TextFormField(
+                    obscureText: true,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "ingrese su contraseña"),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.only(left: 15),
+            alignment: Alignment.centerLeft,
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                "Olvidaste tu contraseña ?",
+                style: TextStyle(
+                  color: Color(0xFFF475269),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 40),
+          InkWell(
+            onTap: () {
+              login();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color(0xFF475269),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF475269).withOpacity(0.3),
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              child: Text(
+                "Iniciar Sesion",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                  letterSpacing: 1,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "No tienes una cuenta ?",
+                style: TextStyle(
+                  color: Color(0xFF475269).withOpacity(0.8),
+                  fontSize: 16,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Ingresar sesion",
+                  style: TextStyle(
+                    color: Color(0xFF475269),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ))),
+    );
   }
 
   void showSnackbar(String msg) {
