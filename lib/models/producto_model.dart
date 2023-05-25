@@ -12,6 +12,8 @@ class ProductoModel {
   late String? productoName;
   late String? productoDescription;
   late String? productoPrice;
+  late String? productoModelo;
+  late String? productoTalla;
   late String? productoImage;
 
   ProductoModel({
@@ -19,6 +21,8 @@ class ProductoModel {
     this.productoName,
     this.productoDescription,
     this.productoPrice,
+    this.productoModelo,
+    this.productoTalla,
     this.productoImage,
   });
 
@@ -28,6 +32,8 @@ class ProductoModel {
       productoName: json['productoName'] as String,
       productoDescription: json['productoDescription'],
       productoPrice: json['productoPrice'],
+      productoModelo: json['productoModelo'] as String,
+      productoTalla: json['productoTalla'],
       productoImage: json['productoImage'],
     );
   }
@@ -38,7 +44,11 @@ class ProductoModel {
     data['productoName'] = productoName;
     data['productoDescription'] = productoDescription;
     data['productoPrice'] = productoPrice;
+    data['productoModelo'] = productoModelo;
+    data['productoTalla'] = productoTalla;
     data['productoImage'] = productoImage;
     return data;
   }
 }
+
+//fa

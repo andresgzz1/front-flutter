@@ -136,6 +136,73 @@ class _ProductoAddEditState extends State<ProductoAddEdit> {
               suffixIcon: const Icon(Icons.monetization_on),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
+              //const Icon(Icons.person),
+              "productoModelo",
+              "Producto Modelo",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'El nombre del producto no puede ser vacio o nulo';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                productoModel!.productoModelo = onSavedVal,
+              },
+              initialValue: productoModel!.productoModelo ?? "",
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
+              //const Icon(Icons.person),
+              "productoTalla",
+              "Producto Talla",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'El precio no puede ser vacio o null ';
+                }
+                if (double.tryParse(onValidateVal) == null) {
+                  return 'Insertar un numero valido con dos decimales ';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                //productModel!.productoPrice = int.parse(onSavedVal),
+                productoModel!.productoTalla = onSavedVal,
+              },
+              initialValue: productoModel!.productoTalla == null
+                  ? ""
+                  : productoModel!.productoTalla.toString(),
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+              suffixIcon: const Icon(Icons.monetization_on),
+            ),
+          ),
           picPicker(
             isImageSelected,
             productoModel!.productoImage ?? "",

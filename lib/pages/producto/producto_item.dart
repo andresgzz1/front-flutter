@@ -69,6 +69,23 @@ class ProductoItem extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+              Text(
+                model!.productoModelo!,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "${model!.productoTalla}",
+                style: const TextStyle(color: Colors.black),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 180,
                 child: Row(
