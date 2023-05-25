@@ -106,15 +106,19 @@ class _ProductoAddEditState extends State<ProductoAddEdit> {
             ),
             child: FormHelper.inputFieldWidget(
               context,
-              //const Icon(Icons.person),
-              "ProductoPrice",
+              // const Icon(Icons.person),
+              "productoPrice",
               "Producto Price",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El precio no puede ser vacio o null ';
+                  return 'El precio no puede estar vacío o nulo';
                 }
-                if (double.tryParse(onValidateVal) == null) {
-                  return 'Insertar un numero valido con dos decimales ';
+                double? value = double.tryParse(onValidateVal);
+                if (value == null) {
+                  return 'Insertar un número válido con dos decimales';
+                }
+                if (value <= 0) {
+                  return 'El precio debe ser mayor a 0';
                 }
 
                 return null;
@@ -148,7 +152,7 @@ class _ProductoAddEditState extends State<ProductoAddEdit> {
               "Producto Modelo",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El nombre del producto no puede ser vacio o nulo';
+                  return 'El Modelo del producto no puede ser vacio o nulo';
                 }
 
                 return null;
@@ -178,16 +182,19 @@ class _ProductoAddEditState extends State<ProductoAddEdit> {
               "Producto Talla",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El precio no puede ser vacio o null ';
+                  return 'La talla no puede estar vacía';
                 }
-                if (double.tryParse(onValidateVal) == null) {
-                  return 'Insertar un numero valido con dos decimales ';
+                double? value = double.tryParse(onValidateVal);
+                if (value == null) {
+                  return 'Insertar un número válido con dos cifras';
+                }
+                if (value < 27 || value > 47) {
+                  return 'La talla debe estar entre 27 y 47';
                 }
 
                 return null;
               },
               (onSavedVal) => {
-                //productModel!.productoPrice = int.parse(onSavedVal),
                 productoModel!.productoTalla = onSavedVal,
               },
               initialValue: productoModel!.productoTalla == null
