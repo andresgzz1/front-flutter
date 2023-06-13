@@ -1,32 +1,35 @@
 import 'dart:convert';
+import 'package:appflutter/pages/inicio/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:appflutter/usuario.dart';
 import 'package:appflutter/menu.dart';
 import 'package:appflutter/pages/cliente/cliente_add_edit.dart';
 import 'package:appflutter/pages/cliente/cliente_list.dart';
+import 'package:appflutter/pages/orden/orden_add_edit.dart';
+import 'package:appflutter/pages/orden/orden_list.dart';
 import 'package:appflutter/pages/producto/producto_add_edit.dart';
 import 'package:appflutter/pages/producto/producto_list.dart';
 import 'package:appflutter/pages/proveedor/proveedor_add_edit.dart';
 import 'package:appflutter/pages/proveedor/proveedor_list.dart';
 import 'package:appflutter/config.dart';
-import 'package:appflutter/pages/inicio/home.dart';
+import 'package:appflutter/pages/inicio/inicio.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'App SNKRS';
+  static const String _title = '';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: _title,
-        home: Scaffold(
-          appBar: AppBar(title: const Text(_title)),
-          body: const MyStatefulWidget(),
+        home: const Scaffold(
+          appBar: null,
+          body: MyStatefulWidget(),
         ),
         routes: {
           '/list-cliente': (context) => const ClientesList(),
@@ -35,6 +38,9 @@ class MyApp extends StatelessWidget {
           '/list-producto': (context) => const ProductosList(),
           '/add-producto': (context) => const ProductoAddEdit(),
           '/edit-producto': (context) => const ProductoAddEdit(),
+          '/list-orden': (context) => const OrdenList(),
+          '/add-orden': (context) => const OrdenAddEdit(),
+          '/edit-orden': (context) => const OrdenAddEdit(),
           '/list-proveedor': (context) => const ProveedoresList(),
           '/add-proveedor': (context) => const ProveedorAddEdit(),
           '/edit-proveedor': (context) => const ProveedorAddEdit(),
@@ -64,11 +70,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 189, 211, 233),
       body: SingleChildScrollView(
           child: SafeArea(
               child: Column(
         children: [
-          Container(height: 100),
+          Container(
+            height: 175,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/login.png'),
+                fit: BoxFit.fill,
+              ),
+              shape: BoxShape.rectangle,
+            ),
+          ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
             padding: EdgeInsets.symmetric(horizontal: 15),
@@ -85,18 +101,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ]),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.person,
                   size: 27,
                   color: Color(0xFF475269),
                 ),
-                SizedBox(width: 10),
-                Container(
+                const SizedBox(width: 10),
+                SizedBox(
                   // margin: EdgeInsets.,
                   width: 250,
                   child: TextFormField(
                     controller: nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "ingrese su nombre"),
                   ),

@@ -81,7 +81,7 @@ class _ClienteAddEditState extends State<ClienteAddEdit> {
               "Nombre del Cliente",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El nombre del cliente no puede ser vacio o nulo';
+                  return 'El nombre del cliente no puede estar vacio';
                 }
 
                 return null;
@@ -111,7 +111,7 @@ class _ClienteAddEditState extends State<ClienteAddEdit> {
               "Apellido del Cliente",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El precio no puede ser vacio o null ';
+                  return 'El Apellido del cliente no puede estar vacio ';
                 }
 
                 return null;
@@ -182,7 +182,7 @@ class _ClienteAddEditState extends State<ClienteAddEdit> {
           ),
           Center(
             child: FormHelper.submitButton(
-              "Save",
+              "Guardar",
               () {
                 if (validateAndSave()) {
                   //print(clienteModel!.toJson());

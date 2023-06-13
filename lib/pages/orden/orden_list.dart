@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:appflutter/models/proveedor_model.dart';
-import 'package:appflutter/pages/proveedor/proveedor_item.dart';
-import 'package:appflutter/services/api_proveedor.dart';
+import 'package:appflutter/models/orden_model.dart';
+import 'package:appflutter/pages/orden/orden_item.dart';
+import 'package:appflutter/services/api_orden.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
-class ProveedoresList extends StatefulWidget {
-  const ProveedoresList({Key? key}) : super(key: key);
+class OrdenList extends StatefulWidget {
+  const OrdenList({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _ProveedoresListState createState() => _ProveedoresListState();
+  _OrdenListState createState() => _OrdenListState();
 }
 
-class _ProveedoresListState extends State<ProveedoresList> {
+class _OrdenListState extends State<OrdenList> {
   // List<ProductModel> products = List<ProductModel>.empty(growable: true);
   bool isApiCallProcess = false;
   @override
@@ -33,20 +33,20 @@ class _ProveedoresListState extends State<ProveedoresList> {
         inAsyncCall: isApiCallProcess,
         opacity: 0.3,
         key: UniqueKey(),
-        child: loadProveedores(),
+        child: loadOrden(),
       ),
     );
   }
 
-  Widget loadProveedores() {
+  Widget loadOrden() {
     return FutureBuilder(
-      future: APIProveedor.getProveedores(),
+      future: APIOrden.getOrden(),
       builder: (
         BuildContext context,
-        AsyncSnapshot<List<ProveedorModel>?> model,
+        AsyncSnapshot<List<OrdenModel>?> model,
       ) {
         if (model.hasData) {
-          return proveedorList(model.data);
+          return ordenList(model.data);
         }
 
         return const Center(
@@ -56,7 +56,7 @@ class _ProveedoresListState extends State<ProveedoresList> {
     );
   }
 
-  Widget proveedorList(proveedores) {
+  Widget ordenList(orden) {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(
@@ -67,6 +67,7 @@ class _ProveedoresListState extends State<ProveedoresList> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 // ignore: sort_child_properties_last
                 children: [
                   ElevatedButton(
@@ -92,7 +93,7 @@ class _ProveedoresListState extends State<ProveedoresList> {
                       onPressed: () {
                         Navigator.pushNamed(
                           context,
-                          '/add-proveedor',
+                          '/add-orden',
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -102,7 +103,7 @@ class _ProveedoresListState extends State<ProveedoresList> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
                       child: const Text(
-                        'Añadir',
+                        'Añadir orden',
                         style:
                             TextStyle(fontSize: 15, color: Color(0xFFF5F9FD)),
                       )),
@@ -144,7 +145,6 @@ class _ProveedoresListState extends State<ProveedoresList> {
                     ),
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.center,
               ),
               //Navigator.pushNamed(context,'/add-product',);
               //Add Product
@@ -152,16 +152,16 @@ class _ProveedoresListState extends State<ProveedoresList> {
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                itemCount: proveedores.length,
+                itemCount: orden.length,
                 itemBuilder: (context, index) {
-                  return ProveedorItem(
-                    model: proveedores[index],
-                    onDelete: (ProveedorModel model) {
+                  return OrdenItem(
+                    model: orden[index],
+                    onDelete: (OrdenModel model) {
                       setState(() {
                         isApiCallProcess = true;
                       });
 
-                      APIProveedor.deleteProveedor(model.id).then(
+                      APIOrden.deleteOrden(model.id).then(
                         (response) {
                           setState(() {
                             isApiCallProcess = false;

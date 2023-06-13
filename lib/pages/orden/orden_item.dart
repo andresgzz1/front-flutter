@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../models/producto_model.dart';
+import '../../models/orden_model.dart';
 import 'package:flutter/material.dart';
 
-class ProductoItem extends StatelessWidget {
-  final ProductoModel? model;
+class OrdenItem extends StatelessWidget {
+  final OrdenModel? model;
   final Function? onDelete;
 
   // ignore: prefer_const_constructors_in_immutables
-  ProductoItem({
+  OrdenItem({
     Key? key,
     this.model,
     this.onDelete,
@@ -39,9 +39,9 @@ class ProductoItem extends StatelessWidget {
           alignment: Alignment.center,
           margin: const EdgeInsets.all(10),
           child: Image.network(
-            (model!.productoImage == null || model!.productoImage == "")
+            (model!.ordenImage == null || model!.ordenImage == "")
                 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
-                : model!.productoImage!,
+                : model!.ordenImage!,
             height: 70,
             fit: BoxFit.scaleDown,
           ),
@@ -53,7 +53,7 @@ class ProductoItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                model!.productoName!,
+                model!.ordenName!,
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -63,14 +63,14 @@ class ProductoItem extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "${model!.productoPrice}",
+                "${model!.ordenPrice}",
                 style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                model!.productoModelo!,
+                model!.ordenModelo!,
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class ProductoItem extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "${model!.productoTalla}",
+                "${model!.ordenTalla}",
                 style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(

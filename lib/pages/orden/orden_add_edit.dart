@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:appflutter/models/proveedor_model.dart';
-import 'package:appflutter/services/api_proveedor.dart';
+import 'package:appflutter/models/orden_model.dart';
+import 'package:appflutter/services/api_orden.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -10,16 +10,16 @@ import 'package:snippet_coder_utils/hex_color.dart';
 
 import '../../config.dart';
 
-class ProveedorAddEdit extends StatefulWidget {
-  const ProveedorAddEdit({Key? key}) : super(key: key);
+class OrdenAddEdit extends StatefulWidget {
+  const OrdenAddEdit({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _ProveedorAddEditState createState() => _ProveedorAddEditState();
+  _OrdenAddEditState createState() => _OrdenAddEditState();
 }
 
-class _ProveedorAddEditState extends State<ProveedorAddEdit> {
-  ProveedorModel? proveedorModel;
+class _OrdenAddEditState extends State<OrdenAddEdit> {
+  OrdenModel? ordenModel;
   static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   bool isApiCallProcess = false;
   List<Object> images = [];
@@ -31,7 +31,7 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Form Proveedor'),
+          title: const Text('Form orden'),
           elevation: 0,
         ),
         backgroundColor: Colors.grey[200],
@@ -41,7 +41,7 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
           key: UniqueKey(),
           child: Form(
             key: globalFormKey,
-            child: proveedorForm(),
+            child: ordenForm(),
           ),
         ),
       ),
@@ -51,19 +51,19 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
   @override
   void initState() {
     super.initState();
-    proveedorModel = ProveedorModel();
+    ordenModel = OrdenModel();
 
     Future.delayed(Duration.zero, () {
       if (ModalRoute.of(context)?.settings.arguments != null) {
         final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
-        proveedorModel = arguments['model'];
+        ordenModel = arguments['model'];
         isEditMode = true;
         setState(() {});
       }
     });
   }
 
-  Widget proveedorForm() {
+  Widget ordenForm() {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -77,19 +77,90 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
             child: FormHelper.inputFieldWidget(
               context,
               //const Icon(Icons.person),
-              "ProveedorName",
-              "Proveedor Name",
+              "OrdenName",
+              "orden Name",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El nombre del proveedor no puede estar vacio';
+                  return 'El nombre de la orden no puede estar vacio';
                 }
 
                 return null;
               },
               (onSavedVal) => {
-                proveedorModel!.proveedorName = onSavedVal,
+                ordenModel!.ordenName = onSavedVal,
               },
-              initialValue: proveedorModel!.proveedorName ?? "",
+              initialValue: ordenModel!.ordenName ?? "",
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
+              // const Icon(Icons.person),
+              "OrdenPrice",
+              "precio de orden",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'El precio no puede estar vacío o nulo';
+                }
+                double? value = double.tryParse(onValidateVal);
+                if (value == null) {
+                  return 'Insertar un número válido con dos decimales';
+                }
+                if (value <= 0) {
+                  return 'El precio debe ser mayor a 0';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                //productModel!.productoPrice = int.parse(onSavedVal),
+                ordenModel!.ordenPrice = onSavedVal,
+              },
+              initialValue: ordenModel!.ordenPrice == null
+                  ? ""
+                  : ordenModel!.ordenPrice.toString(),
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+              suffixIcon: const Icon(Icons.monetization_on),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
+              //const Icon(Icons.person),
+              "ordenModelo",
+              "orden Modelo",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'El Modelo de la orden no puede estar vacio';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                ordenModel!.ordenModelo = onSavedVal,
+              },
+              initialValue: ordenModel!.ordenModelo ?? "",
               obscureText: false,
               borderFocusColor: Colors.black,
               borderColor: Colors.black,
@@ -107,29 +178,28 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
             child: FormHelper.inputFieldWidget(
               context,
               //const Icon(Icons.person),
-              "ProveedorPrice",
-              "Cantidad",
+              "ordenTalla",
+              "orden Talla",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'Insertar una cantidad';
+                  return 'La talla no puede estar vacía';
                 }
                 double? value = double.tryParse(onValidateVal);
                 if (value == null) {
-                  return 'Insertar un numero';
+                  return 'Insertar un número válido con dos cifras';
                 }
-                if (value <= 0) {
-                  return 'La cantidad debe ser mayor a 0';
+                if (value < 27 || value > 47) {
+                  return 'La talla debe estar entre 27 y 47';
                 }
 
                 return null;
               },
               (onSavedVal) => {
-                //productModel!.proveedorPrice = int.parse(onSavedVal),
-                proveedorModel!.proveedorPrice = onSavedVal,
+                ordenModel!.ordenTalla = onSavedVal,
               },
-              initialValue: proveedorModel!.proveedorPrice == null
+              initialValue: ordenModel!.ordenTalla == null
                   ? ""
-                  : proveedorModel!.proveedorPrice.toString(),
+                  : ordenModel!.ordenTalla.toString(),
               obscureText: false,
               borderFocusColor: Colors.black,
               borderColor: Colors.black,
@@ -141,12 +211,12 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
           ),
           picPicker(
             isImageSelected,
-            proveedorModel!.proveedorImage ?? "",
+            ordenModel!.ordenImage ?? "",
             (file) => {
               setState(
                 () {
                   //model.productPic = file.path;
-                  proveedorModel!.proveedorImage = file.path;
+                  ordenModel!.ordenImage = file.path;
                   isImageSelected = true;
                 },
               )
@@ -160,14 +230,14 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
               "Save",
               () {
                 if (validateAndSave()) {
-                  //print(proveedorModel!.toJson());
+                  //print(productoModel!.toJson());
 
                   setState(() {
                     isApiCallProcess = true;
                   });
 
-                  APIProveedor.saveProveedor(
-                    proveedorModel!,
+                  APIOrden.saveOrden(
+                    ordenModel!,
                     isEditMode,
                     isImageSelected,
                   ).then(
@@ -179,7 +249,7 @@ class _ProveedorAddEditState extends State<ProveedorAddEdit> {
                       if (response) {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
-                          '/list-proveedor',
+                          '/list-orden',
                           (route) => false,
                         );
                       } else {

@@ -28,7 +28,7 @@ class _ClientesListState extends State<ClientesList> {
         title: const Text('NodeJS - CRUD'),
         elevation: 0,
       ),*/
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color(0xFFCEDDEE),
       body: ProgressHUD(
         inAsyncCall: isApiCallProcess,
         opacity: 0.3,
@@ -58,34 +58,17 @@ class _ClientesListState extends State<ClientesList> {
 
   Widget clienteList(clientes) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
+              Column(
                 // ignore: sort_child_properties_last
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/add-cliente',
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50))),
-                      child: const Text(
-                        'Add Cliente',
-                        style: TextStyle(fontSize: 15, color: Colors.black),
-                      )),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(
@@ -95,15 +78,70 @@ class _ClientesListState extends State<ClientesList> {
                         //Navigator.push(context,MaterialPageRoute(builder: (context) => Home()),                        );
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlueAccent,
+                          backgroundColor: Color(0xFF475269),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 30),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50))),
+                      child: const Text('Menu',
+                          style: TextStyle(
+                              fontSize: 17, color: Color(0xFFF5F9FD)))),
+                  SizedBox(height: 5),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/add-cliente',
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF475269),
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 30),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
                       child: const Text(
-                        'Menu',
-                        style: TextStyle(fontSize: 15, color: Colors.black),
+                        'Añadir Cliente',
+                        style:
+                            TextStyle(fontSize: 17, color: Color(0xFFF5F9FD)),
                       )),
+                  SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF5F9FD),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF475269).withOpacity(0.3),
+                          blurRadius: 5,
+                          spreadRadius: 1,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          // margin : EdgeInsets.only(left: 5),
+                          width: 75,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Buscar",
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.search,
+                          size: 27,
+                          color: Color(0xFF475269),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
               ),

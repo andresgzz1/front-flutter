@@ -2,11 +2,13 @@
 
 import 'dart:io';
 
+import 'package:appflutter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:appflutter/pages/cliente/cliente_list.dart';
 import 'package:appflutter/pages/producto/producto_list.dart';
 import 'package:appflutter/pages/proveedor/proveedor_list.dart';
-import 'package:appflutter/pages/inicio/inicio.dart';
+import 'package:appflutter/pages/orden/orden_list.dart';
+import 'package:appflutter/pages/inicio/home.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -18,13 +20,15 @@ class MenuState extends State<Menu> {
   getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-        return const inicio();
+        return Home();
       case 1:
         return const ClientesList();
       case 2:
         return const ProductosList();
       case 3:
         return const ProveedoresList();
+      case 4:
+        return const OrdenList();
     }
   }
 
@@ -39,21 +43,23 @@ class MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Empresa SNKRS"),
+        title: const Text("SNKRS"),
+        backgroundColor: Color(0xFF475269),
       ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
             const UserAccountsDrawerHeader(
-              accountName: Text('Empresa SNKRS'),
-              accountEmail: Text('contaco@gmail.com'),
+              decoration: BoxDecoration(color: Color(0xFF475269)),
+              accountName: Text('SNKRS'),
+              accountEmail: Text('zapatilla@gmail.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/logoxyz.png'),
               ),
             ),
             ListTile(
               title: const Text('Inicio'),
-              leading: const Icon(Icons.phone),
+              leading: const Icon(Icons.home),
               selected: (0 == _selectDrawerItem),
               onTap: () {
                 _onSelectItem(0);
@@ -85,11 +91,19 @@ class MenuState extends State<Menu> {
               },
             ),
             ListTile(
-              title: const Text('Ventas'),
-              leading: const Icon(Icons.production_quantity_limits),
+              title: const Text('Orden de compra'),
+              leading: const Icon(Icons.article),
               selected: (4 == _selectDrawerItem),
               onTap: () {
                 _onSelectItem(4);
+              },
+            ),
+            ListTile(
+              title: const Text('Ventas'),
+              leading: const Icon(Icons.production_quantity_limits),
+              selected: (3 == _selectDrawerItem),
+              onTap: () {
+                _onSelectItem(3);
               },
             ),
             const Divider(),
