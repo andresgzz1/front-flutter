@@ -87,7 +87,7 @@ class _OrdenListState extends State<OrdenList> {
                       child: const Text(
                         'Menu',
                         style:
-                            TextStyle(fontSize: 15, color: Color(0xFFF5F9FD)),
+                            TextStyle(fontSize: 17, color: Color(0xFFF5F9FD)),
                       )),
                   ElevatedButton(
                       onPressed: () {
@@ -105,47 +105,47 @@ class _OrdenListState extends State<OrdenList> {
                       child: const Text(
                         'Añadir orden',
                         style:
-                            TextStyle(fontSize: 15, color: Color(0xFFF5F9FD)),
+                            TextStyle(fontSize: 17, color: Color(0xFFF5F9FD)),
                       )),
-                  SizedBox(height: 10),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF5F9FD),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0xFF475269).withOpacity(0.3),
-                          blurRadius: 5,
-                          spreadRadius: 1,
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          // margin : EdgeInsets.only(left: 5),
-                          width: 75,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Buscar",
-                            ),
-                          ),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.search,
-                          size: 27,
-                          color: Color(0xFF475269),
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                height: 55,
+                decoration: BoxDecoration(
+                  color: Color(0xFFF5F9FD),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF475269).withOpacity(0.3),
+                      blurRadius: 5,
+                      spreadRadius: 1,
+                    )
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      // margin : EdgeInsets.only(left: 5),
+                      width: 75,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Buscar",
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Icon(
+                      Icons.search,
+                      size: 27,
+                      color: Color(0xFF475269),
+                    ),
+                  ],
+                ),
+              ),
+
               //Navigator.pushNamed(context,'/add-product',);
               //Add Product
               ListView.builder(

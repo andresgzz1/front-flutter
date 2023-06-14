@@ -9,6 +9,7 @@ class OrdenModel {
   late int? id;
   late String? ordenName;
   late String? ordenDescription;
+  late String? ordenCantidad;
   late String? ordenPrice;
   late String? ordenModelo;
   late String? ordenTalla;
@@ -18,6 +19,7 @@ class OrdenModel {
     this.id,
     this.ordenName,
     this.ordenDescription,
+    this.ordenCantidad,
     this.ordenPrice,
     this.ordenModelo,
     this.ordenTalla,
@@ -28,7 +30,8 @@ class OrdenModel {
     return OrdenModel(
       id: json['id'] as int,
       ordenName: json['ordenName'] as String,
-      ordenDescription: json['ordenDescription'],
+      ordenDescription: json['ordenDescription'] as String,
+      ordenCantidad: json['ordenCantidad'],
       ordenPrice: json['ordenPrice'],
       ordenModelo: json['ordenModelo'] as String,
       ordenTalla: json['ordenTalla'],
@@ -41,6 +44,7 @@ class OrdenModel {
     data['id'] = id;
     data['ordenName'] = ordenName;
     data['ordenDescription'] = ordenDescription;
+    data['ordenCantidad'] = ordenCantidad;
     data['ordenPrice'] = ordenPrice;
     data['ordenModelo'] = ordenModelo;
     data['ordenTalla'] = ordenTalla;

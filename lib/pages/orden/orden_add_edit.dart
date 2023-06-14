@@ -31,7 +31,7 @@ class _OrdenAddEditState extends State<OrdenAddEdit> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Form orden'),
+          title: const Text('Orden de compra'),
           elevation: 0,
         ),
         backgroundColor: Colors.grey[200],
@@ -77,11 +77,11 @@ class _OrdenAddEditState extends State<OrdenAddEdit> {
             child: FormHelper.inputFieldWidget(
               context,
               //const Icon(Icons.person),
-              "OrdenName",
-              "orden Name",
+              "ordenName",
+              "ID Orden",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El nombre de la orden no puede estar vacio';
+                  return 'El nombre de la orden no puede ser vacio o nulo';
                 }
 
                 return null;
@@ -106,9 +106,106 @@ class _OrdenAddEditState extends State<OrdenAddEdit> {
             ),
             child: FormHelper.inputFieldWidget(
               context,
+              //const Icon(Icons.person),
+              "ordenDescription",
+              "Descripción",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'La descripcion no puede ser nula';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                ordenModel!.ordenDescription = onSavedVal,
+              },
+              initialValue: ordenModel!.ordenDescription ?? "",
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
+              //const Icon(Icons.person),
+              "ordenModelo",
+              "Modelo",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'El Modelo de la orden no puede ser vacio o nulo';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                ordenModel!.ordenModelo = onSavedVal,
+              },
+              initialValue: ordenModel!.ordenModelo ?? "",
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
+              //const Icon(Icons.person),
+              "ordenCantidad",
+              "Cantidad",
+              (onValidateVal) {
+                if (onValidateVal == null || onValidateVal.isEmpty) {
+                  return 'La cantidad no puede ser vacío o nulo';
+                }
+                double? value = double.tryParse(onValidateVal);
+                if (value == null) {
+                  return 'Insertar un número válido con dos decimales';
+                }
+                if (value <= 0) {
+                  return 'La cantidad debe ser mayor a 0';
+                }
+
+                return null;
+              },
+              (onSavedVal) => {
+                ordenModel!.ordenCantidad = onSavedVal,
+              },
+              initialValue: ordenModel!.ordenCantidad ?? "",
+              obscureText: false,
+              borderFocusColor: Colors.black,
+              borderColor: Colors.black,
+              textColor: Colors.black,
+              hintColor: Colors.black.withOpacity(0.7),
+              borderRadius: 10,
+              showPrefixIcon: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 10,
+              top: 10,
+            ),
+            child: FormHelper.inputFieldWidget(
+              context,
               // const Icon(Icons.person),
-              "OrdenPrice",
-              "precio de orden",
+              "ordenPrice",
+              "Precio",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
                   return 'El precio no puede estar vacío o nulo';
@@ -148,38 +245,8 @@ class _OrdenAddEditState extends State<OrdenAddEdit> {
             child: FormHelper.inputFieldWidget(
               context,
               //const Icon(Icons.person),
-              "ordenModelo",
-              "orden Modelo",
-              (onValidateVal) {
-                if (onValidateVal == null || onValidateVal.isEmpty) {
-                  return 'El Modelo de la orden no puede estar vacio';
-                }
-
-                return null;
-              },
-              (onSavedVal) => {
-                ordenModel!.ordenModelo = onSavedVal,
-              },
-              initialValue: ordenModel!.ordenModelo ?? "",
-              obscureText: false,
-              borderFocusColor: Colors.black,
-              borderColor: Colors.black,
-              textColor: Colors.black,
-              hintColor: Colors.black.withOpacity(0.7),
-              borderRadius: 10,
-              showPrefixIcon: false,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 10,
-              top: 10,
-            ),
-            child: FormHelper.inputFieldWidget(
-              context,
-              //const Icon(Icons.person),
               "ordenTalla",
-              "orden Talla",
+              "Talla",
               (onValidateVal) {
                 if (onValidateVal == null || onValidateVal.isEmpty) {
                   return 'La talla no puede estar vacía';
@@ -256,7 +323,7 @@ class _OrdenAddEditState extends State<OrdenAddEdit> {
                         FormHelper.showSimpleAlertDialog(
                           context,
                           Config.appName,
-                          "Error occur",
+                          "ocurre un error, por favor verificar",
                           "OK",
                           () {
                             Navigator.of(context).pop();

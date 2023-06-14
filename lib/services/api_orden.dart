@@ -23,7 +23,6 @@ class APIOrden {
 
     if (response.statusCode == 200) {
       return compute(ordenFromJson, response.body);
-
       //return true;
     } else {
       return null;
@@ -35,13 +34,13 @@ class APIOrden {
     bool isEditMode,
     bool isFileSelected,
   ) async {
-    var ordenURL = "${Config.ordenAPI}/";
+    var productURL = "${Config.ordenAPI}/";
 
     if (isEditMode) {
-      ordenURL = "$ordenURL${model.id.toString()}/";
+      productURL = "$productURL${model.id.toString()}/";
     }
 
-    var url = Uri.http(Config.apiURL, ordenURL);
+    var url = Uri.http(Config.apiURL, productURL);
 
     var requestMethod = isEditMode ? "PUT" : "POST";
 
@@ -51,8 +50,11 @@ class APIOrden {
     };*/
 
     var request = http.MultipartRequest(requestMethod, url);
-    request.fields["OrdenName"] = model.ordenName!;
-    request.fields["OrdenPrice"] =
+    request.fields["ordenName"] = model.ordenName!;
+    request.fields["ordenDescription"] = model.ordenDescription!;
+    request.fields["ordenCantidad"] =
+        double.parse(model.ordenCantidad!).toStringAsFixed(2);
+    request.fields["ordenPrice"] =
         double.parse(model.ordenPrice!).toStringAsFixed(2);
     request.fields["ordenModelo"] = model.ordenModelo!;
     request.fields["ordenTalla"] = model.ordenTalla!;
@@ -60,7 +62,7 @@ class APIOrden {
 
     if (model.ordenImage != null && isFileSelected) {
       http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
-        'OrdenImage',
+        'ordenImage',
         model.ordenImage!,
       );
 

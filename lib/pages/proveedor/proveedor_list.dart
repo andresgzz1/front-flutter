@@ -102,7 +102,7 @@ class _ProveedoresListState extends State<ProveedoresList> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
                       child: const Text(
-                        'Añadir',
+                        'Añadir proveedor',
                         style:
                             TextStyle(fontSize: 15, color: Color(0xFFF5F9FD)),
                       )),

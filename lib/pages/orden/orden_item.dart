@@ -63,24 +63,28 @@ class OrdenItem extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "${model!.ordenPrice}",
+                "${model!.ordenDescription}",
                 style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                model!.ordenModelo!,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+                "${model!.ordenCantidad}",
+                style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
                 "${model!.ordenTalla}",
+                style: const TextStyle(color: Colors.black),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "${model!.ordenPrice}",
                 style: const TextStyle(color: Colors.black),
               ),
               const SizedBox(
@@ -95,7 +99,7 @@ class OrdenItem extends StatelessWidget {
                       child: const Icon(Icons.edit),
                       onTap: () {
                         Navigator.of(context).pushNamed(
-                          '/edit-producto',
+                          '/edit-orden',
                           arguments: {
                             'model': model,
                           },
